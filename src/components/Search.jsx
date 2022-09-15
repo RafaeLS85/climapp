@@ -6,8 +6,7 @@ export function Search({ onSearchChange }) {
   const [cityList, setCityList] = useState();
   const [loading, setLoading] = useState(false);
 
-  const API_key = import.meta.env.VITE_RAPID_API_KEY;
-  const OPEN_WEATHER_API_KEY = import.meta.env.VITE_OPEN_WEATHER_KEY;
+  const API_key = import.meta.env.VITE_RAPID_API_KEY;  
   // const lat = 39.31;
   // const lon = -74.5;
 
