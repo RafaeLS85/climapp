@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-tailwind/react": "^1.2.4",
     "autoprefixer": "^10.4.10",
     "postcss": "^8.4.16",
     "react": "^18.2.0",

@@ -1,6 +1,8 @@
 import { getBackroundImage } from "../helpers/getBackroundImage";
 import { useFetch } from "../hooks/useFetch";
 import { Card } from "./Card";
+import { Footer } from "./Footer";
+import Navbar from "./Navbar";
 import { Search } from "./Search";
 
 export function ActualLocation({ lat, lon }) {
@@ -20,6 +22,8 @@ export function ActualLocation({ lat, lon }) {
 
   if (data) {
     return (
+      <>
+       <Navbar data={data}/>
       <div
         className="myConteiner"
         style={{
@@ -28,13 +32,16 @@ export function ActualLocation({ lat, lon }) {
           backgroundSize: "cover",
         }}
       >
-        {<Card weather={data} />}
+        
+        {/* {<Card weather={data} />} */}
 
         <div className="content">
-          <h1 className="text-2xl font-bold underline">Climapp v1</h1>
+          
           <Search />
         </div>
       </div>
+      <Footer />
+      </>
     );
   }
 }

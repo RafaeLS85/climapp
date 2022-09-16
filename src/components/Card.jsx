@@ -10,9 +10,10 @@ export function Card({ weather }) {
 
   return (
     <article className="article-content">
-      <h3>Current location: {name}</h3>  
+      <h3>Your location: {name}</h3>  
      
       <p> Temperature: { kelvinToCelsius(main.temp) }</p>
     </article>
   );
 }
+

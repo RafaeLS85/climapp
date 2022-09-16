@@ -6,7 +6,7 @@ export function Home() {
   const { latitude, longitude } = useLocation();  
 
   return (
-    <div>      
+    <div>           
         {latitude && longitude && (
           <ActualLocation lat={latitude} lon={longitude} />
         )}      
