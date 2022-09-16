@@ -1,17 +1,15 @@
 import { WiDaySunny } from "react-icons/wi";
+import { kelvinToCelsius } from "../helpers/tempConversor";
+import '../App.css'
 
-export function Card({ weather }) {
-
-  const kelvinToCelsius = (value) =>  {       
-    return Math.round( (value - 273.15) * 100 ) / 100;
-  }
+export function Card({ weather }) {  
 
   console.log(weather);
 
   const { main, name } = weather;
 
   return (
-    <article>
+    <article className="article-content">
       <h3>Current location: {name}</h3>  
      
       <p> Temperature: { kelvinToCelsius(main.temp) }</p>

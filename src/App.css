@@ -10,7 +10,16 @@
 }
 
 .content{
-    padding: 40px;
+   padding: 40px;
    background-color: #4B72E8;
+   line-height: 2rem;
+}
+
+.article-content{
+ font-width: bolder;
+ text-align: center;
+ font-size: 1.5rem;
+
+
 }
 

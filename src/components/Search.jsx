@@ -2,13 +2,11 @@ import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import { CityList } from "./CityList";
 
-export function Search({ onSearchChange }) {
+export function Search() {
   const [cityList, setCityList] = useState();
   const [loading, setLoading] = useState(false);
 
-  const API_key = import.meta.env.VITE_RAPID_API_KEY;  
-  // const lat = 39.31;
-  // const lon = -74.5;
+  const API_key = import.meta.env.VITE_RAPID_API_KEY; 
 
   const options = {
     method: "GET",
@@ -22,14 +20,19 @@ export function Search({ onSearchChange }) {
 
     setLoading(true);
 
+    if(!inputValue) {
+      setLoading(false);
+      setCityList([]);
+      return
+    }
+
     const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${inputValue}`;
     const response = await fetch(url, options);
     const json = await response.json();
     const { data } = json;
     console.log({ data });
     setLoading(false);
-
-    // need to get latitude and longitude from response.
+    
     const formatData = data.map((city) => {
       return {
         city: city.city,
@@ -41,7 +44,7 @@ export function Search({ onSearchChange }) {
         region: city.region,
         type: city.type,
       };
-    });
+    });   
 
     console.log({ formatData }); // lista con los resultados, mostrar esta lista y hacer que sea clickeable para llamar a la api:
 
@@ -50,10 +53,10 @@ export function Search({ onSearchChange }) {
     // const urlOpenApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}`
   };
 
-  function handleChange(event) {
-    console.log(event.target.value);
-    onSearchChange(event.target.value);
-  }
+  // function handleChange(event) {
+  //   console.log(event.target.value);
+  //   onSearchChange(event.target.value);
+  // }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -66,15 +69,14 @@ export function Search({ onSearchChange }) {
         <input
           type="text"
           name="city"
-          placeholder="search by city"
-          onChange={handleChange}
+          placeholder="search by city"         
         />
         <button type="submit">
           <FaSistrix />
         </button>
       </form>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>Loading...</p>}      
 
       {cityList && <CityList list={cityList} />}     
 
