@@ -4,7 +4,6 @@
   height: 60px
 }
 
-/* The point of this tutorial is here */
 .form {
   display: flex;
   flex-direction: row;

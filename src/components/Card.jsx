@@ -20,34 +20,28 @@ export function Card({ weather }) {
       >
         <div className="flex mb-4">
           <div className="w-1/2">
-            <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h3>
-             <p className="text-gray-900 dark:text-white text-base">{ getDayName(today.toString())  }</p>
+            <h3 className="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{name}</h3>
+             <p className="text-gray-900 text-center dark:text-white text-base">{ getDayName(today.toString())  }</p>
           </div>
-          <div className="w-1/2 capitalize tracking-tight text-gray-900 dark:text-white">{description}</div>
+          <div className="w-1/2 capitalize text-center tracking-tight text-gray-900 dark:text-white">{description}</div>
         </div>
         <div className="flex mb-4">
           <div className="w-1/2">
-            <p className="text-7xl font-bold tracking-tight text-gray-900 dark:text-white">{ parseInt( kelvinToCelsius(main.temp)) }º<small>c</small></p>
+            <p className="text-7xl mt-5 font-bold text-center tracking-tight text-gray-900 dark:text-white">{ parseInt( kelvinToCelsius(main.temp)) }º<small>c</small></p>
           </div>
-          <div className="w-1/2 font-bold tracking-tight text-gray-900 dark:text-white" style={{
-           
-          }} >
-            
-            
-              <WeatherIcon icon={icon}/>
-           
-            
-            </div>
+          <div className="w-1/2">            
+              <WeatherIcon icon={icon}/>           
+           </div>
         </div>
 
         <div className="flex mb-4">
-          <div className="w-1/2 font-bold tracking-tight text-gray-900 dark:text-white">
+          <div className="w-1/2 font-bold  text-center tracking-tight text-gray-900 dark:text-white">
             <h3>Highest</h3>
             <div>
             { parseInt( kelvinToCelsius(main.temp_max)) }º<small>c</small>
             </div>
           </div>
-          <div className="w-1/2 font-bold tracking-tight text-gray-900 dark:text-white">
+          <div className="w-1/2 font-bold text-center tracking-tight text-gray-900 dark:text-white">
             <h3>Lowest</h3>
             <div>
             { parseInt( kelvinToCelsius(main.temp_min)) }º<small className="">c</small>

@@ -1,4 +1,3 @@
-import "../App.css";
 import { useLocation } from "../hooks/useLocation";
 import { getBackroundImageByCode } from "../helpers/getBackroundImage";
 import { Search } from '../components/Search'
@@ -15,8 +14,7 @@ export function Home() {
   if(data){
     console.log(data)
     return (
-      <div
-        className="myContainer"
+      <div        
         style={{
           backgroundImage: `url(${getBackroundImageByCode(data?.weather[0].main) || ""})`,
           backgroundRepeat: "no-repeat",
@@ -26,9 +24,7 @@ export function Home() {
         }}
       >
        <Search />
-
-        <Card weather={data}  />
-
+       <Card weather={data} />
       </div>
     );
   } 
