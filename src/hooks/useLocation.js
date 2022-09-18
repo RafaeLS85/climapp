@@ -8,8 +8,7 @@ export function useLocation() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position.coords.latitude, position.coords.longitude);
+    navigator.geolocation.getCurrentPosition((position) => {      
 
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
@@ -31,8 +30,7 @@ export function useLocation() {
       const response = await fetch(urlOpenApi, options);
       const json = await response.json();
       setData(json);
-      setLoading(false);
-      console.log(json);
+      setLoading(false);      
     } catch (error) {
       setError(error);
       setLoading(false);
