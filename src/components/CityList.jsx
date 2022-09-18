@@ -3,7 +3,7 @@ import { CityItem } from "./CityItem";
 export function CityList({ list }) {
   return (
     <div className="mx-auto">
-      <div className="bg-white shadow-md rounded my-6">
+      <div className="shadow-md rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 my-6" style={{backgroundColor: '#63C9C9'}}>
         <table className="text-left w-full border-collapse">
           <thead>
             <tr>
