@@ -1,12 +1,10 @@
 
 import { getDayName } from "../helpers/dates";
-import { getBackroundColorByDesc } from "../helpers/getBackroundImage";
 import { kelvinToCelsius } from "../helpers/tempConversor";
 import "./Card.css";
 import { WeatherIcon } from "./WeatherIcon";
 
-export function Card({ weather }) {
-  console.log(weather);
+export function Card({ weather }) {  
 
   const { main, name } = weather; 
   const icon = weather?.weather[0]?.icon 
