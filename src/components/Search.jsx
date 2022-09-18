@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
+import { Card } from "./Card";
 import { CityList } from "./CityList";
+import './Search.css'
 
 export function Search() {
   const [cityList, setCityList] = useState();
@@ -64,23 +66,31 @@ export function Search() {
     searchCityWeather(event.target.city.value);
   }
   return (
-    <>
-    <div className="mt-5 md:col-span-2 md:mt-0">
-      <form onSubmit={handleSubmit}>
-       
-        <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700">City name</label>
-                <input  placeholder="search by city" type="text" name="city" id="city" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-              </div>
-        {/* <button type="submit">
-          <FaSistrix />
-        </button> */}
-      </form>
+    <div className="p-8">
 
+    {/* <div className="mt-5 md:col-span-2 md:mt-0">
+      <form onSubmit={handleSubmit}>       
+        <div className="col-span-6 sm:col-span-3">
+                <label htmlFor="city" className="block text-sm font-medium text-gray-700">City name</label>              
+                <input  placeholder="Enter location" type="text" name="city" id="city" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+              </div>
+        <button type="submit">
+          <FaSistrix />
+        </button>
+      </form>
       {loading && <p>Loading...</p>}           
      {cityList && <CityList list={cityList} />}  
+    </div> */}
+
+    
+      <form onSubmit={handleSubmit} className="form">
+        <input type="search" name="city" id="city" placeholder="Enter location"  className="search-field" />
+        <button type="submit" className="search-button">        
+          <FaSistrix />
+        </button>
+      </form>
+    
 
     </div>
-    </>
   );
 }

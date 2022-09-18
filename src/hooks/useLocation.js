@@ -1,18 +1,44 @@
 import { useEffect, useState } from "react";
 
-export function useLocation(){
+export function useLocation() {
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+  const [error, setError] = useState();
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
-    const [latitude, setLatitude] = useState()
-    const [longitude, setLongitude] = useState()
-
-   useEffect(() => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position.coords.latitude, position.coords.longitude);
 
-        console.log(position.coords.latitude, position.coords.longitude)
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
 
-        setLatitude(position.coords.latitude)
-        setLongitude(position.coords.longitude)
-    })
-   }, []) 
-   return { latitude, longitude }
+      const OPEN_WEATHER_API_KEY = import.meta.env.VITE_OPEN_WEATHER_KEY;     
+
+      const urlOpenApi = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${OPEN_WEATHER_API_KEY}`;
+      const options = {
+        method: "GET",
+      };
+
+      fetchApi(urlOpenApi, options);
+    });
+  }, []);
+
+  const fetchApi = async (urlOpenApi, options) => {
+    try {
+      setLoading(true);
+      const response = await fetch(urlOpenApi, options);
+      const json = await response.json();
+      setData(json);
+      setLoading(false);
+      console.log(json);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+      console.log("error", error);
+    }
+  };
+
+  return { latitude, longitude, data, error, loading };
 }
