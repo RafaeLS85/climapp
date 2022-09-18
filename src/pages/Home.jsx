@@ -5,6 +5,7 @@ import { Spinner } from "../components/Spinner";
 import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import './Home.css'
+import { Footer } from "../components/Footer";
 
 export function Home() {
 
@@ -60,18 +61,22 @@ export function Home() {
 
   if(data){   
     return (
+      <>
       <div        
+      className="flex flex-col h-screen justify-between"
         style={{
           backgroundImage: `url(${getBackroundImageByCode( newLocation?.weather[0].main ?? data?.weather[0].main )})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           height: '100vh', 
-          margin: '0px'
+          margin: '0px',
         }}
       >
        <Search />             
        <Card weather={newLocation ?? data } />
+      <Footer />
       </div>
+      </>
     );
   } 
 }
