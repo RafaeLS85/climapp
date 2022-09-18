@@ -2,14 +2,15 @@ import { useLocation } from "../hooks/useLocation";
 import { getBackroundImageByCode } from "../helpers/getBackroundImage";
 import { Search } from '../components/Search'
 import { Card } from "../components/Card";
+import { Spinner } from "../components/Spinner";
 
 export function Home() {
 
   const {latitude, longitude, data, error, loading } = useLocation()
  
-  if (loading) return <p>Loading..</p>;
+  if (loading) return <Spinner />;
 
-  if (error) return <p>Error on get actual location</p>;
+  if (error) return <p>Error on get location</p>;
 
   if(data){
     console.log(data)
@@ -23,8 +24,9 @@ export function Home() {
           margin: '0px'
         }}
       >
-       <Search />
+       <Search />       
        <Card weather={data} />
+
       </div>
     );
   } 

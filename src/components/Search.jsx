@@ -2,13 +2,47 @@ import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import { Card } from "./Card";
 import { CityList } from "./CityList";
-import './Search.css'
+import "./Search.css";
+import { Spinner } from "./Spinner";
 
 export function Search() {
-  const [cityList, setCityList] = useState();
+  const defaultCities = [
+    {
+      city: "Miami",
+      country: "United States of America",
+      countryCode: "US",
+      latitude: 35.69278,
+      longitude: -100.63889,
+      name: "Miami",
+      region: "Texas",
+      type: "CITY",
+    },
+    {
+      city: "Miami",
+      country: "United States of America",
+      countryCode: "US",
+      latitude: 33.396666666,
+      longitude: -110.871666666,
+      name: "Miami",
+      region: "Arizona",
+      type: "CITY",
+    },
+    {
+      city: "Alexander",
+      country: "United States of America",
+      countryCode: "US",
+      latitude: 42.9022,
+      longitude: -78.2583,
+      name: "Alexander",
+      region: "New York",
+      type: "CITY",
+    },
+  ];
+
+  const [cityList, setCityList] = useState(defaultCities);
   const [loading, setLoading] = useState(false);
 
-  const API_key = import.meta.env.VITE_RAPID_API_KEY; 
+  const API_key = import.meta.env.VITE_RAPID_API_KEY;
 
   const options = {
     method: "GET",
@@ -16,16 +50,14 @@ export function Search() {
       "X-RapidAPI-Key": API_key,
       "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
     },
-  }; 
-
+  };
   const searchCityWeather = async (inputValue) => {
-
     setLoading(true);
 
-    if(!inputValue) {
+    if (!inputValue) {
       setLoading(false);
       setCityList([]);
-      return
+      return;
     }
 
     const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${inputValue}`;
@@ -34,7 +66,7 @@ export function Search() {
     const { data } = json;
     console.log({ data });
     setLoading(false);
-    
+
     const formatData = data.map((city) => {
       return {
         city: city.city,
@@ -46,7 +78,7 @@ export function Search() {
         region: city.region,
         type: city.type,
       };
-    });   
+    });
 
     console.log({ formatData }); // lista con los resultados, mostrar esta lista y hacer que sea clickeable para llamar a la api:
 
@@ -67,30 +99,20 @@ export function Search() {
   }
   return (
     <div className="p-8">
-
-    {/* <div className="mt-5 md:col-span-2 md:mt-0">
-      <form onSubmit={handleSubmit}>       
-        <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700">City name</label>              
-                <input  placeholder="Enter location" type="text" name="city" id="city" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-              </div>
-        <button type="submit">
-          <FaSistrix />
-        </button>
-      </form>
-      {loading && <p>Loading...</p>}           
-     {cityList && <CityList list={cityList} />}  
-    </div> */}
-
-    
       <form onSubmit={handleSubmit} className="form">
-        <input type="search" name="city" id="city" placeholder="Enter location"  className="search-field" />
-        <button type="submit" className="search-button">        
+        <input
+          type="search"
+          name="city"
+          id="city"
+          placeholder="Enter location"
+          className="search-field"
+        />
+        <button type="submit" className="search-button">
           <FaSistrix />
         </button>
       </form>
-    
-
+      {loading && <Spinner />}
+      {<CityList list={cityList} />}
     </div>
   );
 }

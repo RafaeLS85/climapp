@@ -1,5 +1,6 @@
 
 import { getDayName } from "../helpers/dates";
+import { getBackroundColorByDesc } from "../helpers/getBackroundImage";
 import { kelvinToCelsius } from "../helpers/tempConversor";
 import "./Card.css";
 import { WeatherIcon } from "./WeatherIcon";
@@ -10,13 +11,17 @@ export function Card({ weather }) {
   const { main, name } = weather; 
   const icon = weather.weather[0].icon 
   const description = weather.weather[0].description
+  const maindesc = weather.weather[0].main
 
-  const today = new Date();
+  const today = new Date();  
 
   return (
-    <article className="article-content">
+    <article className="article-content ">
       <div        
-        className="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        className="block p-6 rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700"
+        style={{
+          backgroundColor: `${getBackroundColorByDesc(null)}`,
+        }}       
       >
         <div className="flex mb-4">
           <div className="w-1/2">

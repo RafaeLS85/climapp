@@ -12,6 +12,20 @@ export function getBackroundImageByTemp(temp) {
   if (!celsius) return "fallback.webp";
 }
 
+
+export function getBackroundColorByDesc(desc){  
+
+  if (desc === mainCodes.clear ) return "#0D9DE3";
+  if (desc === mainCodes.clouds ) return "#01BFFF";
+  if (desc === mainCodes.drizzle ) return "#00CCFF";
+  if (desc === mainCodes.rain ) return "#7F9BA6";
+  if (desc === mainCodes.snow ) return "#F1F1F1";  
+  if (desc === mainCodes.storm ) return "#4E6969"; 
+
+  if (!desc) return "#fff";
+}
+
+
 export function getBackroundImageByCode(code) {
 
   if (code === mainCodes.clear ) return "codes/Clear.webp";
