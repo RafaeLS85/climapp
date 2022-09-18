@@ -7,7 +7,7 @@ export function Footer() {
           className="text-end text-black p-4"         
         >        
           <div className="text-black ">
-            v1.1
+            v1.2
           </div>
         </div>
       </footer>

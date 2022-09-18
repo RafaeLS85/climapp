@@ -22,9 +22,13 @@ export function Home() {
         setFetching(true)    
         const response = await fetch(url, { method: 'GET' });
         const data = await response.json();        
+        if(data.cod == '404') {
+          alert(data.message)
+          setFetching(false)
+          return
+        }        
         setNewLocation(data)
         setFetching(false)
-        if(data.cod == '404') alert(data.message)        
       } catch (error) {
         alert(error.message) 
         setFetching(false)    
