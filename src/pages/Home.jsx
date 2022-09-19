@@ -6,8 +6,11 @@ import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import './Home.css'
 import { Footer } from "../components/Footer";
+import { useTranslation } from "react-i18next";
+import { SelectLanguage } from "../components/SelectLanguage";
 
-export function Home() {
+export function Home() { 
+  const { t, i18n } = useTranslation('translation');
 
   const OPEN_WEATHER_API_KEY = import.meta.env.VITE_OPEN_WEATHER_KEY; 
   const [ newLocation, setNewLocation ] = useState();
@@ -41,21 +44,24 @@ export function Home() {
     }
 
     return (
-      <div className="p-8">
-        <form onSubmit={handleSubmit} className="form">
-          <input
-            type="search"
-            name="city"
-            id="city"
-            placeholder="Enter location"
-            className="search-field"
-          />
-          <button type="submit" className="search-button">
-            <FaSistrix />
-          </button>
-        </form> 
-        { fetching ? <Spinner /> : null }
-      </div>      
+      <>
+        <div className="flex p-8">
+          <form onSubmit={handleSubmit} className="form">
+            <input
+              type="search"
+              name="city"
+              id="city"
+              placeholder={t('placeholder_search')}
+              className="search-field"
+              />
+            <button type="submit" className="search-button">
+              <FaSistrix />
+            </button>
+          </form> 
+          { fetching ? <Spinner /> : null }
+         <SelectLanguage />
+        </div>      
+      </>
     );
   }
 
@@ -66,20 +72,20 @@ export function Home() {
   if(data){   
     return (
       <>
-      <div        
-      className="flex flex-col h-screen justify-between"
-        style={{
-          backgroundImage: `url(${getBackroundImageByCode( newLocation?.weather[0].main ?? data?.weather[0].main )})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          height: '100vh', 
-          margin: '0px',
-        }}
-      >
-       <Search />             
-       <Card weather={newLocation ?? data } />
-      <Footer />
-      </div>
+        <div        
+          className="flex flex-col h-screen justify-between"
+            style={{
+              backgroundImage: `url(${getBackroundImageByCode( newLocation?.weather[0].main ?? data?.weather[0].main )})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              height: '100vh', 
+              margin: '0px',
+            }}
+          >
+          <Search />             
+          <Card weather={newLocation ?? data } />
+          <Footer />
+        </div>
       </>
     );
   } 
