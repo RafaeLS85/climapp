@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 export function SelectLanguage() {
 
-  const [opt, setOpt] = useState(() => JSON.parse(localStorage.getItem('language')) || 'en' )
+  const [opt, setOpt] = useState(() => JSON.parse(localStorage.getItem('lng')) || 'en' )
 
   const languages = [
     {
@@ -23,7 +23,7 @@ export function SelectLanguage() {
   ];
 
   useEffect(() => {
-    localStorage.setItem('language', JSON.stringify(opt))
+    localStorage.setItem('lng', JSON.stringify(opt))
   }, [opt])
 
 //   const def_option = Select.selected = () => languages[0].code  
